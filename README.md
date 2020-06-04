@@ -47,7 +47,6 @@ What I want you to try:
 
 1. create a declarative pipeline which contains the following stages: `clean`, `test`, `build`, `deploy`
 2. create a scripted pipeline which contains the following stages: `clean`, `test`, `build`, `deploy`
-3. create a scripted pipeline using groovy which contains the following stages: `clean`, `test`, `build`, `deploy`
 
 EXTRA:
 - Try to add some validation i.e. correct version. Make sure it fails when it should!
