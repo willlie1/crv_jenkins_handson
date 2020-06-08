@@ -1,14 +1,14 @@
 pipeline {
     agent any
 
-    stages {
+    environment {
+        version = sh script: './mvnw help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+    }
 
+    stages {
         stage('version check') {
             steps {
-                script { 
-                    version = sh script: './mvnw help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
-                }
-                echo "version ${version}"
+                echo "Version=${env.version}"
             }
         }
 
@@ -30,9 +30,26 @@ pipeline {
             }
         }
         stage('deploy') {
-            steps {
-                echo "Yay, we've deployed our application using a jenkins pipeline"
-            }
+             stage('snapshot') {
+                 when {
+                    expression {
+                        return env.version.contains("SNAPSHOT")
+                    }
+                }
+                steps {
+                    echo "This is a snapshot version we are not going to deploy anything"
+                }
+             }
+             stage('release') {
+                 when {
+                    expression {
+                        return !env.version.contains("SNAPSHOT")
+                    }
+                }
+                steps {
+                    echo "Yay, we've deployed our application using a jenkins pipeline"
+                }
+             }
         }
     }
 
