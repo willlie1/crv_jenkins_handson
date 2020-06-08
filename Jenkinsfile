@@ -10,13 +10,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'echo install'
+                sh './mvnw install'
                 echo 'Building..'
             }
         }
         stage('Test') {
             steps {
-                sh 'echo validate'
+                sh './mvnw validate'
                 echo 'Testing..'
             }
         }
