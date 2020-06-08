@@ -1,17 +1,19 @@
 node {
     stage('clean') {
         steps {
-            sh ./mvnw clean
+            sh './mvnw clean'
         }
     }
     stage('test') {
         steps {
-            sh ./mvnw test
+            sh './mvnw test'
+            junit '**/target/surefire-reports/*.xml'
         }
     }
     stage('build') {
         steps {
-            sh ./mvnw isntall
+            sh './mvnw package -Dmaven.test.skip'
+            step $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
         }
     }
     stage('deploy') {
