@@ -2,15 +2,17 @@ node {
     checkout scm
 
     stage('clean') {
-        echo 'clean....'
+        sh './mvnw clean'
     }
     stage('Test') {
-        echo 'clean....'
+        sh './mvnw test'
+        junit '**/target/surefire-reports/*.xml'
     }
     stage('Build') {
-        echo 'clean....'
+        sh './mvnw package -Dmaven.test.skip'
+        step $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
     }
     stage('Deploy') {
-        echo 'clean....'
+        echo "Yay, we've deployed our application using a jenkins pipeline"
     }
 }
