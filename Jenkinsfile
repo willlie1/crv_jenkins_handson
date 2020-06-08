@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clean') {
             steps {
-                sh 'echo clean'
+                sh './mvnw clean'
                 echo 'Cleaning..'
             }
         }
