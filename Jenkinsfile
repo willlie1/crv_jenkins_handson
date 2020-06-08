@@ -5,13 +5,15 @@ pipeline {
         stage('Clean') {
             steps {
                 echo 'Cleaning..'
+                mvn clean
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
                 // sh 'make check || true'
-                junit '**/target/*.*'
+                // junit '**/target/*.*'
+                mvn test
             }
         }
         stage('Build') {
