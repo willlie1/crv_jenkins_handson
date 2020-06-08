@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clean') {
             steps {
-                echo ‘Cleaning..’
+                echo 'Cleaning..'
             }
         }
         stage('Test') {
@@ -17,12 +17,20 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh 'make'
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
         stage('Deploy') {
+                when {
+                    expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+                    }
+                }
             steps {
                 echo 'Deploying....'
-            }
+                sh 'make publish'
+            }            }
         }
     }
 }
