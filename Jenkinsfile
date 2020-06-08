@@ -3,17 +3,25 @@ pipeline {
 
 	stages {
 		stage('clean') {
-			echo 'cleaning project'
+			steps {			
+				echo 'cleaning project'
+			}
 		
 		}
 		stage('test') {
-			echo 'testing code'	
+			steps {			
+				echo 'testing code'	
+			}
 		}
 		stage('build') {
-			echo 'building source code'
+			steps {
+				echo 'building source code'
+			}
 		}
 		stage('deploy') {
-			echo "Yay, we've deployed our application using a jenkins pipeline"
+			steps {
+				echo "Yay, we've deployed our application using a jenkins pipeline"
+			}
 		}
 
 	}
