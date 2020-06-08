@@ -10,14 +10,14 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'make check || true'
+                // sh 'make check || true'
                 junit '**/target/*.xml'
             }
         }
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'make'
+                // sh 'make'
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
@@ -29,7 +29,7 @@ pipeline {
                 }
             steps {
                 echo 'Deploying....'
-                sh 'make publish'
+                // sh 'make publish'
             }            
         }
     }
