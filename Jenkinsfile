@@ -29,28 +29,25 @@ pipeline {
                 step $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
             }
         }
-        stage('deploy') {
-             stage('snapshot') {
-                 when {
-                    expression {
-                        return env.version.contains("SNAPSHOT")
-                    }
+        stage('SNAPSHOT') {
+            when {
+                expression {
+                    return env.version.contains("SNAPSHOT")
                 }
-                steps {
-                    echo "This is a snapshot version we are not going to deploy anything"
+            }
+            steps {
+                echo "This is a snapshot version we are not going to deploy anything"
+            }
+        }
+        stage('RELEASE') {
+            when {
+                expression {
+                    return !env.version.contains("SNAPSHOT")
                 }
-             }
-             stage('release') {
-                 when {
-                    expression {
-                        return !env.version.contains("SNAPSHOT")
-                    }
-                }
-                steps {
-                    echo "Yay, we've deployed our application using a jenkins pipeline"
-                }
-             }
+            }
+            steps {
+                echo "Yay, we've deployed our application using a jenkins pipeline"
+            }
         }
     }
-
 }
