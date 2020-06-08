@@ -1,5 +1,3 @@
-def version = sh script: './mvnw help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
-
 pipeline {
     agent any
 
@@ -7,6 +5,9 @@ pipeline {
 
         stage('version check') {
             steps {
+                script { 
+                    version = sh script: './mvnw help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+                }
                 echo "version ${version}"
             }
         }
