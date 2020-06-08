@@ -25,18 +25,16 @@ pipeline {
             steps {
                 echo 'Building..'
                 // sh 'make'
-                sh './mvnw compile'
+                // sh './mvnw compile'
+                // step $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
+                sh './mvnw package -Dmaven.test.skip'
+                // Adding artifact to archive
                 step $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
             }
         }
         stage('Deploy') {
-                when {
-                    expression {
-                        currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-                    }
-                }
             steps {
-                echo 'Deploying....'
+                echo '!!! Deploying....'
             }            
         }
     }
