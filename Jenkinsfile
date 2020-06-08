@@ -30,7 +30,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 sh 'make publish'
-            }            }
+            }            
         }
     }
 }
