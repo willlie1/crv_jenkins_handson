@@ -15,7 +15,7 @@ node {
         sh './mvnw test'
     }
     stage('Deploy') {
-        echo 'Deploying....''
+        echo 'Deploying....'
     }
 }
 
