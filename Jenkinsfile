@@ -1,4 +1,5 @@
 node {
+	checkout scm
 	stage('clean') {
 		sh './mvnw clean'
 		echo 'cleaning'
