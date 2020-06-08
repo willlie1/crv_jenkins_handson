@@ -1,20 +1,28 @@
-node {
-    stage('clean') {
-        steps {
-            sh ./mvnw clean
+pipeline {
+    agent any
+
+    stages {
+        stage('clean') {
+            steps {
+		sh './mvnw clean'
+            }
         }
-    }
-    stage('test') {
-        steps {
-            sh ./mvnw test
+        stage('test') {
+            steps {
+		sh './mvnw test'
+		junit '**/target/surefire-reports/*.xml'
+            }
         }
-    }
-    stage('build') {
-        steps {
-            sh ./mvnw isntall
+        stage('build') {
+            steps {
+		sh './mvnw compile'
+		step $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
+            }
         }
-    }
-    stage('deploy') {
-        echo "Yay, we've deployed our application using a jenkins pipeline"
+        stage('deploy') {
+            steps {
+		echo "Done and dusted."
+            }
+        }
     }
 }
