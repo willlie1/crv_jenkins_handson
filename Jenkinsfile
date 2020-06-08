@@ -15,7 +15,7 @@ pipeline {
         }
         stage('build') {
             steps {
-		sh './mvnw compile'
+		sh './mvnw package'
 		step $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
             }
         }
