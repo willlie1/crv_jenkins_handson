@@ -19,7 +19,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh './mvnw package'
+                sh './mvnw package -DskipTests'
             }
         }
         stage('Deploy') {
@@ -42,7 +42,7 @@ node {
     }
     stage('Build') {
         echo 'Building....'
-        sh './mvnw package'
+        sh './mvnw package -DskipTests'
     }
     stage('Deploy') {
         echo 'Deploying....'
