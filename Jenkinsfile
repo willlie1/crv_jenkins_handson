@@ -5,7 +5,9 @@ pipeline {
         stage('Clean') {
             steps {
                 echo 'Cleaning..'
-                mvn clean
+                // mvn clean
+                sh './mvnw clean'
+
             }
         }
         stage('Test') {
@@ -13,14 +15,18 @@ pipeline {
                 echo 'Testing..'
                 // sh 'make check || true'
                 // junit '**/target/*.*'
-                mvn test
+                // mvn test
+                sh './mvnw test'
+        		junit '**/target/surefire-reports/*.xml'
+
             }
         }
         stage('Build') {
             steps {
                 echo 'Building..'
                 // sh 'make'
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                sh './mvnw compile'
+                step $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
             }
         }
         stage('Deploy') {
@@ -31,7 +37,6 @@ pipeline {
                 }
             steps {
                 echo 'Deploying....'
-                // sh 'make publish'
             }            
         }
     }
