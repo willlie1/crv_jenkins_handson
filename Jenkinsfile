@@ -16,6 +16,10 @@ node {
         step $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
     }
     stage('Deploy') {
-        echo 'Deploying....'
+        if (currentBuild.result == null || currentBuild.result == 'SUCCESS') { 
+            echo 'Deploying....'
+        } else {
+            echo 'Not Deploying....'
+        }       
     }
 }
