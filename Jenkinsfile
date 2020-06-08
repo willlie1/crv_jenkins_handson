@@ -1,14 +1,20 @@
 node {
     stage('clean') {
-        echo 'clean....'
+        steps {
+            sh ./mvnw clean
+        }
     }
     stage('test') {
-        echo 'test....'
+        steps {
+            sh ./mvnw test
+        }
     }
     stage('build') {
-        echo 'build....'
+        steps {
+            sh ./mvnw isntall
+        }
     }
     stage('deploy') {
-        echo 'deploy....'
+        echo "Yay, we've deployed our application using a jenkins pipeline"
     }
 }
