@@ -4,17 +4,20 @@ pipeline {
 	stages {
 		stage('clean') {
 			steps {			
+				sh './mvnw clean
 				echo 'cleaning project'
 			}
 		
 		}
 		stage('test') {
 			steps {			
+				sh './mvnw test'
 				echo 'testing code'	
 			}
 		}
 		stage('build') {
 			steps {
+				./mvnw package'
 				echo 'building source code'
 			}
 		}
