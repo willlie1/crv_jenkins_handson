@@ -9,14 +9,15 @@ pipeline {
             sh './mvnw clean'
           }
         }
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh './mvnw test'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building..'
             }
         }
         stage('Deploy') {
