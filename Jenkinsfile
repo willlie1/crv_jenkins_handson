@@ -1,22 +1,6 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Build') {
-            steps {
+node {
+        stage ('Build'){
                 echo 'Building..'
-				sh './mvnw install'
-				}
+				sh './mvnw clean'
+			}
       }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
-}
