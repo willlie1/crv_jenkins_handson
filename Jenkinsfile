@@ -4,14 +4,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Clean') {
             steps {
-                echo 'Building..'
+                echo 'Cleaning..'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building..'
             }
         }
         stage('Deploy') {
@@ -24,11 +29,14 @@ pipeline {
 
 //Scripted Pipeline
 node {
-    stage('Build') {
-        echo 'Building....'
+    stage('Clean') {
+        echo 'Cleaning....'
     }
     stage('Test') {
         echo 'Testing....'
+    }
+    stage('Build') {
+        echo 'Building....'
     }
     stage('Deploy') {
         echo 'Deploying....'
