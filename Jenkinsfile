@@ -7,16 +7,19 @@ pipeline {
         stage('Clean') {
             steps {
                 echo 'Cleaning..'
+                sh './mvnw clean'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh './mvnw test'
             }
         }
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh './mvnw package'
             }
         }
         stage('Deploy') {
