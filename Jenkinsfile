@@ -4,22 +4,24 @@ pipeline {
     stages {
         stage('clean') {
             steps {
-                echo 'Building..'
-            }
-        }
-        stage('build') {
-            steps {
-                echo 'Building..'
+		sh './mvnw clean'
             }
         }
         stage('test') {
             steps {
-                echo 'Testing..'
+		sh './mvnw test'
+		junit '**/target/surefire-reports/*.xml'
+            }
+        }
+        stage('build') {
+            steps {
+		sh './mvnw compile'
+		step $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
             }
         }
         stage('deploy') {
             steps {
-                echo 'Deploying....'
+		echo "Done and dusted."
             }
         }
     }
